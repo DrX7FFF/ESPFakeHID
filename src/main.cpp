@@ -1,29 +1,30 @@
 #include <Arduino.h>
-#include <BleKeyboard.h>
+#include <BleMouse.h>
 
 namespace {
 constexpr unsigned long kSendIntervalMs = 120000;
 constexpr unsigned long kLoopDelayMs = 50;
+constexpr int8_t kMouseDeltaPx = 2;
+constexpr unsigned long kMouseStepDelayMs = 20;
 
-BleKeyboard bleKeyboard("K400 Plus", "Logitech", 100);
+BleMouse bleMouse("M705", "Logitech", 100);
 unsigned long lastSendAtMs = 0;
 }
 
 void setup() {
   Serial.begin(115200);
   Serial.print("Started\n");
-  bleKeyboard.begin();
+  bleMouse.begin();
 }
 
 void loop() {
-  if (bleKeyboard.isConnected()) {
+  if (bleMouse.isConnected()) {
     const unsigned long now = millis();
 
     if (lastSendAtMs == 0 || now - lastSendAtMs >= kSendIntervalMs) {
-      // bleKeyboard.write(KEY_F15);
-      bleKeyboard.press(KEY_LEFT_SHIFT);
-      delay(100);
-      bleKeyboard.release(KEY_LEFT_SHIFT);
+      bleMouse.move(-kMouseDeltaPx, 0);
+      delay(kMouseStepDelayMs);
+      bleMouse.move(kMouseDeltaPx, 0);
       lastSendAtMs = now;
       Serial.print(".");
     }
