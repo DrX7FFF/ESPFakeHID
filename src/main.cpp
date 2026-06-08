@@ -11,6 +11,7 @@ unsigned long lastSendAtMs = 0;
 
 void setup() {
   Serial.begin(115200);
+  Serial.print("Started\n");
   bleKeyboard.begin();
 }
 
@@ -21,6 +22,7 @@ void loop() {
     if (lastSendAtMs == 0 || now - lastSendAtMs >= kSendIntervalMs) {
       bleKeyboard.write(KEY_F15);
       lastSendAtMs = now;
+      Serial.print("Started\n");
     }
   } else {
     lastSendAtMs = 0;
