@@ -7,7 +7,7 @@ constexpr unsigned long kLoopDelayMs = 50;
 constexpr int8_t kMouseDeltaPx = 2;
 constexpr unsigned long kMouseStepDelayMs = 20;
 
-BleMouse bleMouse("M705", "Logitech", 100);
+BleMouse bleMouse("M240", "Logitech", 100);
 unsigned long lastSendAtMs = 0;
 }
 
