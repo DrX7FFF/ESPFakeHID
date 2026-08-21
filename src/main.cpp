@@ -65,8 +65,8 @@ void startDirectedAdvertising() {
   delay(50);
 
   esp_ble_adv_params_t params = {};
-  params.adv_int_min       = 0x3000; //40*0.625ms = 30ms // 12288*0.625ms= 7.68s
-  params.adv_int_max       = 0x4000; //96*0.625ms = 60ms // 16384*0.625ms= 10.24s
+  params.adv_int_min       = 0x30; //40*0.625ms = 30ms // 12288*0.625ms= 7.68s trop grand retour en arrière
+  params.adv_int_max       = 0x60; //96*0.625ms = 60ms // 16384*0.625ms= 10.24s trop grand retour en arrière
   params.adv_type          = ADV_TYPE_DIRECT_IND_LOW;
   params.own_addr_type     = BLE_ADDR_TYPE_PUBLIC;
   memcpy(params.peer_addr, bondDev.bd_addr, sizeof(esp_bd_addr_t));
